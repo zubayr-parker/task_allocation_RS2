@@ -89,20 +89,21 @@ while remaining_goals:
     robot1_position = turtlebot1.pos()
     robot2_position = turtlebot2.pos()
 
-    # Find the closest goal for both robots
+    # Find the closest goal for TurtleBot 1 and remove that goal from the remaining list
     goal1 = closest_goal(robot1_position, remaining_goals)
-    goal2 = closest_goal(robot2_position, remaining_goals)
-    
-    # Move TurtleBot1 to its closest goal
     print(f'Moving TurtleBot 1 to goal {goal1}')
     move_to_goal(turtlebot1, goal1)
+    
+    # Remove goal1 from the remaining goals list after TurtleBot 1 moves
+    remaining_goals.remove(goal1)
 
-    # Move TurtleBot2 to its closest goal
+    # Find the closest goal for TurtleBot 2 from the updated remaining goals
+    goal2 = closest_goal(robot2_position, remaining_goals)
     print(f'Moving TurtleBot 2 to goal {goal2}')
     move_to_goal(turtlebot2, goal2)
 
-    # Remove the goals that have been assigned to the robots
-    remaining_goals = [goal for goal in remaining_goals if goal != goal1 and goal != goal2]
+    # Remove goal2 from the remaining goals list after TurtleBot 2 moves
+    remaining_goals.remove(goal2)
 
 # Keep the window open until clicked
 screen.exitonclick()
